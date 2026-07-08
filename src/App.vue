@@ -1,19 +1,24 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { pokemonService } from './service/pokemon.service'
-import { type Pokemon } from './types/pokemon.interface'
+import PokemonDisplay from './components/PokemonDisplay.vue'
+import PokemonForm from './components/PokemonForm.vue'
+import PokemonResult from './components/PokemonResult.vue'
 import { useGameManager } from './composables/useGameManager'
 
-const { pokemon, isLoading, error } = useGameManager()
+const { pokemon, isLoading, gameState, loadNewPokemon, handlePokemonNameSubmit } = useGameManager()
 </script>
 
 <template>
-  <h1>Guess the Pokemon</h1>
-  <div v-if="isLoading">Cargando...</div>
-  <div v-else-if="error">{{ error }}</div>
-  <div v-else-if="pokemon">
-    <img :src="pokemon.image" :alt="pokemon.name" />
-    <p>{{ pokemon.name }}</p>
+  <div class="container mx-auto my-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md 8 col-lg-6">
+        <PokemonDisplay :pokemon="pokemon" :is-loading="isLoading" :game-state="gameState" />
+        <PokemonForm
+          :game-state="gameState"
+          :handle-pokemon-name-submit="handlePokemonNameSubmit"
+        />
+        <PokemonResult :game-state="gameState" :load-new-pokemon="loadNewPokemon" />
+      </div>
+    </div>
   </div>
 </template>
 

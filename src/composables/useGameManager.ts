@@ -29,6 +29,8 @@ export function useGameManager() {
 
     try {
       pokemon.value = await pokemonService.getRandomPokemon()
+
+      console.log(pokemon.value.name)
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'An error occurred'
     } finally {
