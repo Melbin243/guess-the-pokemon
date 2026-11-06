@@ -15,7 +15,9 @@ defineProps<{
     <div class="card-header">
       <h1 class="text-center">
         {{
-          gameState !== GameState.Playing ? pokemon?.name?.toUpperCase() : '¿Quién es ese Pokémon?'
+          gameState !== GameState.Playing
+            ? pokemon?.name?.toUpperCase()
+            : '¿Quién es ese Pokémon? - Cloudflare Test'
         }}
       </h1>
     </div>
